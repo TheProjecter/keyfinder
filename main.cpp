@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
         e = dispatcher(argc, argv);
     }
     qDebug("%d",e);
-    MainWindow gui;
+    MainWindow gui(10);
     switch(e){
     case 1:
         gui.show();
     }
 
-    if (e < 0){
+    if (e < 0 || true){
         return a.exec();
     }
     QFile *file = new QFile("/dev/usb/hiddev0");

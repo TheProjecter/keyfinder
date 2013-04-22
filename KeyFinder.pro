@@ -24,16 +24,19 @@ SOURCES += main.cpp \
     keyprinter.cpp \
     mainwindow.cpp \
     layer.cpp \
-    listener.cpp
+    listener.cpp \
+    btnsettings.cpp
 
 HEADERS += \
     keyprinter.h \
     mainwindow.h \
     layer.h \
-    listener.h
+    listener.h \
+    btnsettings.h
 
 LIBS += -lX11 -lXtst
 
 FORMS += \
     mainwindow.ui \
-    layer.ui
+    layer.ui \
+    btnsettings.ui

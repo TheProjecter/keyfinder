@@ -9,12 +9,15 @@
  */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "btnsettings.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(int numBtns, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QLayout *layout = ui->BtnList->layout();
+    for (int s = 0; s < numBtns; s++) layout->addWidget(new BtnSettings(QString::number(s)));
 }
 
 MainWindow::~MainWindow()
