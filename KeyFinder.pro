@@ -25,14 +25,18 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     layer.cpp \
     listener.cpp \
-    btnsettings.cpp
+    btnsettings.cpp \
+    config.cpp \
+    keythread.cpp
 
 HEADERS += \
     keyprinter.h \
     mainwindow.h \
     layer.h \
     listener.h \
-    btnsettings.h
+    btnsettings.h \
+    config.h \
+    keythread.h
 
 LIBS += -lX11 -lXtst
 

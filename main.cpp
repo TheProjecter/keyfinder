@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         gui.show();
     }
 
-    if (e < 0 || true){
+    if (e < 0){
         return a.exec();
     }
     QFile *file = new QFile("/dev/usb/hiddev0");
@@ -39,7 +39,9 @@ int main(int argc, char *argv[])
     if (ff)file->open(ff , QFile::ReadOnly, QFile::DontCloseHandle);
     else{
         if (!file->exists())qDebug("Fatal: hiddev0 not found!");
-        else qDebug("Please run this program as root (e.g. 'sudo KeyFinder')");
+        else{
+            system(QString("kdesu ").append(QString(argv[0])).toLatin1());
+        }
         return -1;
     }
     qDebug(file->isOpen()?"true":"bugg");
@@ -53,6 +55,7 @@ int main(int argc, char *argv[])
 }
 
 static int dispatcher(int argc, char *argv[]){
+    if (QString(argv[1]) == "--kdesu") return system((QString("kdesu ") + argv[0]).toLatin1());
     if (QString(argv[1]) == "gui") return 1;
     return 0;
 }

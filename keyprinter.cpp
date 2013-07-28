@@ -12,21 +12,26 @@
 #include <X11/keysym.h>
 #include <iostream>
 
-static XKeyEvent createKeyEvent(Display *display, Window &win,
-                           Window &winRoot, bool press,
+static XKeyEvent createKeyEvent(Display *display, bool press,
                            int keycode, int modifiers);
 KeyPrinter::KeyPrinter()
 {
 }
 
-static XKeyEvent createKeyEvent(Display *display, Window &win,
-                           Window &winRoot, bool press,
+static XKeyEvent createKeyEvent(Display *display, bool press,
                            int keycode, int modifiers)
 {
    XKeyEvent event;
 
+   Window winRoot = DefaultRootWindow(display);
+
+
+   Window winFocus;
+   int    revert;
+   XGetInputFocus(display, &winFocus, &revert);
+
    event.display     = display;
-   event.window      = win;
+   event.window      = winFocus;
    event.root        = winRoot;
    event.subwindow   = None;
    event.time        = CurrentTime;
@@ -53,13 +58,7 @@ void KeyPrinter::sendKey(int n, bool pressed){
         return;
     }
 
-    Window winRoot = XDefaultRootWindow(display);
-
-    Window winFocus;
-    int    revert;
-    XGetInputFocus(display, &winFocus, &revert);
-
-    XKeyEvent event = createKeyEvent(display, winFocus, winRoot, pressed, n + XK_KP_0, 1);
+    XKeyEvent event = createKeyEvent(display, pressed, n + XK_KP_0, 1);
     XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
     XFlush(display);
     XCloseDisplay(display);
