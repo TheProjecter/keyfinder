@@ -55,7 +55,9 @@ int main(int argc, char *argv[])
 }
 
 static int dispatcher(int argc, char *argv[]){
-    if (QString(argv[1]) == "--kdesu") return system((QString("kdesu ") + argv[0]).toLatin1());
+    if (QString(argv[1]) == "--kdesu"){
+        return system((QString("kdesu ") + argv[0]).toLatin1());
+    }
     if (QString(argv[1]) == "gui") return 1;
     return 0;
 }

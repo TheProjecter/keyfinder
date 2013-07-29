@@ -57,8 +57,7 @@ void KeyPrinter::sendKey(int n, bool pressed){
         std::cerr << "Cannot access X, in some cases that may be caused by running this script with sudo, try kdesu, gksudo or gnome-sudo";
         return;
     }
-
-    XKeyEvent event = createKeyEvent(display, pressed, n + XK_KP_0, 1);
+    XKeyEvent event = createKeyEvent(display, pressed, n + XK_KP_0, 1<<4);
     XSendEvent(event.display, event.window, True, KeyPressMask, (XEvent *)&event);
     XFlush(display);
     XCloseDisplay(display);
