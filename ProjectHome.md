@@ -1,0 +1,1 @@
+A simple program I made for my SteelSeries - World of Warcraft® MMO Gaming Mouse, that allow you to bind 10 buttons that linux miss to keyboard key and macros.
